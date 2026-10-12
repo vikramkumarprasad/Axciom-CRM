@@ -20,12 +20,12 @@ public class AuditLogsController : Controller
     }
 
     public async Task<IActionResult> Index(
-        string? user,
-        string? entity,
-        string? action,
-        DateTime? fromDate,
-        DateTime? toDate,
-        int page = 1)
+        [FromQuery(Name = "user")] string? user,
+        [FromQuery(Name = "entity")] string? entity,
+        [FromQuery(Name = "actionFilter")] string? actionFilter,
+        [FromQuery(Name = "fromDate")] DateTime? fromDate,
+        [FromQuery(Name = "toDate")] DateTime? toDate,
+        [FromQuery(Name = "page")] int page = 1)
     {
         var query = _context.AuditLogs.AsQueryable();
 
@@ -39,9 +39,9 @@ public class AuditLogsController : Controller
             query = query.Where(a => a.EntityName == entity);
         }
 
-        if (!string.IsNullOrWhiteSpace(action))
+        if (!string.IsNullOrWhiteSpace(actionFilter))
         {
-            query = query.Where(a => a.Action == action);
+            query = query.Where(a => a.Action == actionFilter);
         }
 
         if (fromDate.HasValue)
@@ -56,7 +56,7 @@ public class AuditLogsController : Controller
 
         ViewData["CurrentUser"] = user;
         ViewData["CurrentEntity"] = entity;
-        ViewData["CurrentAction"] = action;
+        ViewData["CurrentAction"] = actionFilter;
         ViewData["CurrentFromDate"] = fromDate?.ToString("yyyy-MM-dd");
         ViewData["CurrentToDate"] = toDate?.ToString("yyyy-MM-dd");
 
@@ -78,8 +78,8 @@ public class AuditLogsController : Controller
         var entities = await _context.AuditLogs.Select(a => a.EntityName).Distinct().ToListAsync();
         var actions = await _context.AuditLogs.Select(a => a.Action).Distinct().ToListAsync();
 
-        ViewBag.Entities = new SelectList(entities);
-        ViewBag.Actions = new SelectList(actions);
+        ViewBag.Entities = new SelectList(entities, entity);
+        ViewBag.Actions = new SelectList(actions, actionFilter);
 
         return View(logs);
     }

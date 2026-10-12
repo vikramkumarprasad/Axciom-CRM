@@ -32,7 +32,7 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <select name="action" class="form-select form-select-sm" asp-items="ViewBag.Actions">
+                <select name="actionFilter" class="form-select form-select-sm" asp-items="ViewBag.Actions">
                     <option value="">All Actions</option>
                 </select>
             </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-1 d-flex gap-1">
                 <button type="submit" class="btn btn-primary btn-sm flex-grow-1">Filter</button>
-                @if (!string.IsNullOrEmpty(currentUser) || !string.IsNullOrEmpty(currentEntity) || !string.IsNullOrEmpty(currentAction))
+                @if (!string.IsNullOrEmpty(currentUser) || !string.IsNullOrEmpty(currentEntity) || !string.IsNullOrEmpty(currentAction) || !string.IsNullOrEmpty(currentFromDate) || !string.IsNullOrEmpty(currentToDate))
                 {
                     <a asp-action="Index" class="btn btn-outline-secondary btn-sm" title="Clear"><i class="bi bi-x-lg"></i></a>
                 }
@@ -125,16 +125,16 @@
             <span class="small text-muted">Page @currentPage of @totalPages</span>
             <ul class="pagination pagination-sm mb-0">
                 <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                    <a class="page-link" asp-action="Index" asp-route-page="@(currentPage - 1)" asp-route-user="@currentUser" asp-route-entity="@currentEntity" asp-route-action="@currentAction">Previous</a>
+                    <a class="page-link" asp-action="Index" asp-route-page="@(currentPage - 1)" asp-route-user="@currentUser" asp-route-entity="@currentEntity" asp-route-actionFilter="@currentAction" asp-route-fromDate="@currentFromDate" asp-route-toDate="@currentToDate">Previous</a>
                 </li>
                 @for (int i = 1; i <= totalPages; i++)
                 {
                     <li class="page-item @(i == currentPage ? "active" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-user="@currentUser" asp-route-entity="@currentEntity" asp-route-action="@currentAction">@i</a>
+                        <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-user="@currentUser" asp-route-entity="@currentEntity" asp-route-actionFilter="@currentAction" asp-route-fromDate="@currentFromDate" asp-route-toDate="@currentToDate">@i</a>
                     </li>
                 }
                 <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
-                    <a class="page-link" asp-action="Index" asp-route-page="@(currentPage + 1)" asp-route-user="@currentUser" asp-route-entity="@currentEntity" asp-route-action="@currentAction">Next</a>
+                    <a class="page-link" asp-action="Index" asp-route-page="@(currentPage + 1)" asp-route-user="@currentUser" asp-route-entity="@currentEntity" asp-route-actionFilter="@currentAction" asp-route-fromDate="@currentFromDate" asp-route-toDate="@currentToDate">Next</a>
                 </li>
             </ul>
         </div>
