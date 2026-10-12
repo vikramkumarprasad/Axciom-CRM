@@ -1,0 +1,116 @@
+@model AcxiomCRM.Models.Opportunity
+@{
+    ViewData["Title"] = "New Opportunity";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex align-items-center mb-3">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm me-3"><i class="bi bi-arrow-left"></i> Back</a>
+            <h4 class="fw-bold mb-0 text-dark">Create Sales Opportunity</h4>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4">
+            <form asp-action="Create" method="post" id="oppForm">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small mb-3"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label asp-for="OpportunityName" class="form-label fw-semibold small">Opportunity Name <span class="text-danger">*</span></label>
+                        <input asp-for="OpportunityName" class="form-control" placeholder="e.g. Enterprise Cloud License Deal" />
+                        <span asp-validation-for="OpportunityName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="CustomerId" class="form-label fw-semibold small">Customer <span class="text-danger">*</span></label>
+                        <select asp-for="CustomerId" class="form-select" asp-items="ViewBag.Customers">
+                            <option value="">-- Select Customer --</option>
+                        </select>
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Amount" class="form-label fw-semibold small">Deal Amount ($) <span class="text-danger">*</span></label>
+                        <input asp-for="Amount" class="form-control" type="number" step="0.01" min="0.01" placeholder="50000" id="oppAmount" oninput="updateWeighted()" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                        <div class="form-text small">Must be greater than 0.</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Probability" class="form-label fw-semibold small">Probability (%) <span class="text-danger">*</span></label>
+                        <input asp-for="Probability" class="form-control" type="number" min="0" max="100" id="oppProb" oninput="updateWeighted()" />
+                        <span asp-validation-for="Probability" class="text-danger"></span>
+                        <div class="form-text small">Between 0 and 100.</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold small text-muted">Weighted Forecast ($)</label>
+                        <input type="text" class="form-control bg-light" id="oppWeighted" readonly value="$0" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Stage" class="form-label fw-semibold small">Pipeline Stage <span class="text-danger">*</span></label>
+                        <select asp-for="Stage" class="form-select" asp-items="ViewBag.Stages" id="oppStage" onchange="stageChanged()"></select>
+                        <span asp-validation-for="Stage" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="ExpectedCloseDate" class="form-label fw-semibold small">Expected Close Date <span class="text-danger">*</span></label>
+                        <input asp-for="ExpectedCloseDate" class="form-control" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="ExpectedCloseDate" class="text-danger"></span>
+                        <div class="form-text small">Cannot be in the past for active opportunities.</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Notes" class="form-label fw-semibold small">Notes / Decision Criteria</label>
+                        <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Key decision makers, requirements, timeline..."></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                    {
+                        <div class="col-md-6">
+                            <label asp-for="AssignedTo" class="form-label fw-semibold small">Assigned Sales Executive</label>
+                            <select asp-for="AssignedTo" class="form-select" asp-items="ViewBag.Users">
+                                <option value="">-- Assign Sales Executive --</option>
+                            </select>
+                            <span asp-validation-for="AssignedTo" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary px-4 fw-semibold">
+                        <i class="bi bi-check-lg me-1"></i> Save Opportunity
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function updateWeighted() {
+            const amt = parseFloat(document.getElementById('oppAmount').value) || 0;
+            const prob = parseFloat(document.getElementById('oppProb').value) || 0;
+            const weighted = (amt * prob) / 100;
+            document.getElementById('oppWeighted').value = '$' + weighted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function stageChanged() {
+            const stage = document.getElementById('oppStage').value;
+            if (stage === 'Won') {
+                document.getElementById('oppProb').value = 100;
+            } else if (stage === 'Lost') {
+                document.getElementById('oppProb').value = 0;
+            }
+            updateWeighted();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateWeighted);
+    </script>
+}

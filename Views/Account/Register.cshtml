@@ -1,0 +1,66 @@
+@model AcxiomCRM.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="text-center mb-4">
+                <div class="display-6 fw-bold text-dark mb-1">
+                    <i class="bi bi-diagram-3-fill text-primary"></i> Acxiom<span class="text-primary">CRM</span>
+                </div>
+                <p class="text-muted">Create a new sales user account</p>
+            </div>
+
+            <div class="card shadow-sm border-0 p-4">
+                <form asp-action="Register" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label fw-semibold small"></label>
+                        <input asp-for="FullName" class="form-control" placeholder="John Doe" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-semibold small"></label>
+                        <input asp-for="Email" class="form-control" placeholder="john@example.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label fw-semibold small"></label>
+                        <input asp-for="Password" class="form-control" type="password" placeholder="Min. 8 characters" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <div class="form-text small">Must contain uppercase, lowercase, digit, and symbol.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label fw-semibold small"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Repeat password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="alert alert-info py-2 small mb-3">
+                        <i class="bi bi-info-circle me-1"></i> Public registration assigns the <strong>Sales Executive</strong> role. Privileged roles are granted by System Administrators.
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+                        <i class="bi bi-person-plus me-1"></i> Create Account
+                    </button>
+                </form>
+
+                <div class="mt-3 text-center">
+                    <span class="text-muted small">Already have an account? </span>
+                    <a asp-action="Login" class="small fw-semibold text-decoration-none">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

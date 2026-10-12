@@ -1,0 +1,50 @@
+## Build and Compilation Outputs
+[Bb]in/
+[Oo]bj/
+out/
+build/
+[Ll]og/
+[Ll]ogs/
+TestResults/
+
+## Visual Studio and IDE files
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.sln.docstates
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+## SQLite Runtime & Lock Files
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
+
+## Local Environment & Secret Files
+appsettings.Production.json
+*.local.json
+.env
+.env.*
+!.env.example
+
+## Scratch & Test Artifacts
+cookies.txt
+*.log
+test_*.ps1
+scratch/
+
+## Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
