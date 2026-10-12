@@ -22,50 +22,50 @@
     @if (User.Identity?.IsAuthenticated == true)
     {
         <div class="d-flex" id="wrapper">
-            <!-- Sidebar -->
-            <div class="bg-dark text-white border-end" id="sidebar-wrapper" style="min-width: 250px; max-width: 250px; min-height: 100vh;">
-                <div class="sidebar-heading px-4 py-3 border-bottom border-secondary d-flex align-items-center">
+            <!-- Sidebar (White & Collapsible) -->
+            <div class="bg-white border-end shadow-sm" id="sidebar-wrapper">
+                <div class="sidebar-heading px-4 py-3 border-bottom d-flex align-items-center bg-white">
                     <i class="bi bi-diagram-3-fill text-primary fs-3 me-2"></i>
                     <div>
-                        <span class="fs-5 fw-bold text-white tracking-wide">Acxiom<span class="text-primary">CRM</span></span>
-                        <div class="small text-secondary" style="font-size: 0.72rem;">Enterprise Sales Cloud</div>
+                        <span class="fs-5 fw-bold text-dark tracking-wide">Acxiom<span class="text-primary">CRM</span></span>
+                        <div class="small text-muted" style="font-size: 0.72rem;">Enterprise Sales Cloud</div>
                     </div>
                 </div>
-                <div class="list-group list-group-flush my-2">
+                <div class="list-group list-group-flush py-2 bg-white">
                     <a asp-controller="Dashboard" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "active" : "")">
                         <i class="bi bi-speedometer2 me-3 fs-5"></i> Dashboard
                     </a>
                     <a asp-controller="Customers" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Customers" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Customers" ? "active" : "")">
                         <i class="bi bi-people-fill me-3 fs-5"></i> Customers
                     </a>
                     <a asp-controller="Leads" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Leads" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Leads" ? "active" : "")">
                         <i class="bi bi-funnel-fill me-3 fs-5"></i> Leads
                     </a>
                     <a asp-controller="Opportunities" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Opportunities" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Opportunities" ? "active" : "")">
                         <i class="bi bi-briefcase-fill me-3 fs-5"></i> Opportunities
                     </a>
                     <a asp-controller="FollowUps" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "FollowUps" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "FollowUps" ? "active" : "")">
                         <i class="bi bi-calendar-check-fill me-3 fs-5"></i> Follow-Ups
                     </a>
                     <a asp-controller="Activities" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Activities" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Activities" ? "active" : "")">
                         <i class="bi bi-clock-history me-3 fs-5"></i> Activities
                     </a>
                     <a asp-controller="Reports" asp-action="Index" 
-                       class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Reports" ? "active bg-primary border-0" : "hover-dark")">
+                       class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Reports" ? "active" : "")">
                         <i class="bi bi-graph-up-arrow me-3 fs-5"></i> Reports
                     </a>
 
                     @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                     {
-                        <div class="px-4 pt-3 pb-1 text-uppercase text-secondary small fw-bold" style="font-size: 0.7rem; letter-spacing: 0.5px;">Administration</div>
+                        <div class="px-4 pt-3 pb-1 text-uppercase text-muted small fw-bold" style="font-size: 0.68rem; letter-spacing: 0.75px;">Administration</div>
                         <a asp-controller="AuditLogs" asp-action="Index" 
-                           class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "AuditLogs" ? "active bg-primary border-0" : "hover-dark")">
+                           class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "AuditLogs" ? "active" : "")">
                             <i class="bi bi-shield-check me-3 fs-5"></i> Audit Logs
                         </a>
                     }
@@ -73,7 +73,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <a asp-controller="Users" asp-action="Index" 
-                           class="list-group-item list-group-item-action bg-dark text-light px-4 py-2.5 d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Users" ? "active bg-primary border-0" : "hover-dark")">
+                           class="list-group-item list-group-item-action d-flex align-items-center @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Users" ? "active" : "")">
                             <i class="bi bi-person-gear me-3 fs-5"></i> Users & Roles
                         </a>
                     }
@@ -86,6 +86,9 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 py-2 shadow-sm">
                     <div class="container-fluid p-0">
                         <div class="d-flex align-items-center">
+                            <button class="btn btn-outline-secondary btn-sm me-3 rounded-2 shadow-none d-flex align-items-center" id="sidebarToggle" type="button" title="Toggle Sidebar">
+                                <i class="bi bi-list fs-5"></i>
+                            </button>
                             <span class="fs-6 fw-semibold text-secondary">
                                 <i class="bi bi-building me-1"></i> AcxiomCRM Enterprise
                             </span>
