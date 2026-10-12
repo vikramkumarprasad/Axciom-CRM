@@ -1,8 +1,990 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@inject AcxiomCRM.Services.ICurrentUserService CurrentUser
+@{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AcxiomCRM Enterprise — Next-Gen Sales Execution & Revenue Governance</title>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Custom Landing CSS -->
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+</head>
+<body class="landing-body position-relative">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <!-- Atmospheric Glow & Subtle Grid Background -->
+    <div class="landing-hero-backdrop"></div>
+    <div class="landing-grid-pattern"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="navbar navbar-expand-lg landing-nav py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center text-dark text-decoration-none" href="/">
+                <div class="bg-primary text-white rounded-3 p-2 d-flex align-items-center justify-content-center me-2 shadow-sm" style="width: 38px; height: 38px;">
+                    <i class="bi bi-diagram-3-fill fs-5"></i>
+                </div>
+                <div>
+                    <span class="fs-5 fw-bold font-heading text-dark" style="letter-spacing: -0.02em;">Acxiom<span class="text-primary">CRM</span></span>
+                    <span class="badge bg-light text-secondary border ms-1 font-monospace" style="font-size: 0.65rem;">ENTERPRISE</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#landingNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="landingNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#preview">Product Tour</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#capabilities">Capabilities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#calculator">ROI Engine</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#security">Security & Governance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#demo">Live Roles</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-premium-primary btn-sm px-3">
+                            <i class="bi bi-speedometer2"></i> Enter Workspace
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-premium-secondary btn-sm px-3">
+                            <i class="bi bi-box-arrow-in-right"></i> Sign In
+                        </a>
+                        <button type="button" class="btn btn-premium-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#demoModal">
+                            <i class="bi bi-play-circle-fill"></i> Launch Demo
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="position-relative pt-5 pb-4 overflow-hidden">
+        <div class="container text-center pt-3">
+            
+            <!-- Release Pill Badge -->
+            <div class="mb-3">
+                <span class="pill-badge shadow-sm">
+                    <span class="pulse-dot"></span>
+                    <span>AcxiomCRM v2.4 Enterprise</span>
+                    <span class="text-muted fw-normal">|</span>
+                    <span class="fw-semibold text-dark">Strict SRS 17.20 Standard</span>
+                </span>
+            </div>
+
+            <!-- Primary Headline -->
+            <h1 class="hero-heading mb-3">
+                The Revenue Engine for <br class="d-none d-md-block" />
+                <span class="text-gradient-primary">High-Velocity Sales Teams</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle mb-4">
+                Unify your complete commercial lifecycle. From 360° customer intelligence and automated lead qualification to weighted stage forecasting and an immutable compliance audit trail.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-4">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-premium-primary">
+                    <i class="bi bi-rocket-takeoff-fill"></i> Get Started Free
+                </a>
+                <a href="#preview" class="btn btn-premium-secondary">
+                    <i class="bi bi-eye-fill"></i> Explore Live Workspace
+                </a>
+            </div>
+
+            <!-- Trust Indicator Badges -->
+            <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap text-muted small mt-2">
+                <span class="d-flex align-items-center gap-1">
+                    <i class="bi bi-shield-lock-fill text-success"></i> PBKDF2 Identity Hash
+                </span>
+                <span class="d-flex align-items-center gap-1">
+                    <i class="bi bi-diagram-2-fill text-primary"></i> 3-Tier Role Scoping
+                </span>
+                <span class="d-flex align-items-center gap-1">
+                    <i class="bi bi-clock-history text-indigo" style="color: #6366f1;"></i> Append-Only Audit Trail
+                </span>
+                <span class="d-flex align-items-center gap-1">
+                    <i class="bi bi-check2-circle text-info" style="color: #0284c7;"></i> 14 Acceptance Criteria Verified
+                </span>
+            </div>
+
+            <!-- Hero Mockup Frame (Interactive Live Showcase) -->
+            <div class="app-mockup-wrapper text-start" id="preview">
+                
+                <!-- Window Controls and Tab Buttons -->
+                <div class="mockup-titlebar">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="window-dots">
+                            <span class="window-dot dot-red"></span>
+                            <span class="window-dot dot-yellow"></span>
+                            <span class="window-dot dot-green"></span>
+                        </div>
+                        <span class="small text-muted font-monospace d-none d-sm-inline" style="font-size: 0.78rem;">
+                            <i class="bi bi-lock-fill text-success me-1"></i> https://app.acxiomcrm.com/live-workspace
+                        </span>
+                    </div>
+
+                    <!-- Interactive Tabs Navigation -->
+                    <div class="d-flex gap-1">
+                        <button type="button" class="mockup-tab-btn active" data-target="tab-pipeline">
+                            <i class="bi bi-graph-up me-1"></i> Pipeline Forecast
+                        </button>
+                        <button type="button" class="mockup-tab-btn" data-target="tab-lead-wizard">
+                            <i class="bi bi-funnel me-1"></i> Lead Conversion
+                        </button>
+                        <button type="button" class="mockup-tab-btn" data-target="tab-customer360">
+                            <i class="bi bi-person-badge me-1"></i> Customer 360°
+                        </button>
+                        <button type="button" class="mockup-tab-btn" data-target="tab-audit">
+                            <i class="bi bi-shield-check me-1"></i> Audit Trail
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mockup Body Content -->
+                <div class="mockup-body">
+
+                    <!-- TAB 1: Pipeline Forecast -->
+                    <div class="mockup-pane" id="tab-pipeline">
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="bg-white p-3 rounded-3 border shadow-sm">
+                                    <div class="text-muted small fw-medium">Active Pipeline Value</div>
+                                    <div class="fs-4 fw-bold text-dark mt-1">$1,425,000</div>
+                                    <span class="badge bg-success-subtle text-success mt-1" style="font-size: 0.7rem;">+18.4% this quarter</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="bg-white p-3 rounded-3 border shadow-sm">
+                                    <div class="text-muted small fw-medium">Weighted Forecast</div>
+                                    <div class="fs-4 fw-bold text-primary mt-1">$864,200</div>
+                                    <span class="badge bg-primary-subtle text-primary mt-1" style="font-size: 0.7rem;">Expected close 30d</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="bg-white p-3 rounded-3 border shadow-sm">
+                                    <div class="text-muted small fw-medium">Closed-Won Deals</div>
+                                    <div class="fs-4 fw-bold text-success mt-1">$520,000</div>
+                                    <span class="badge bg-success-subtle text-success mt-1" style="font-size: 0.7rem;">34 Deals Closed</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="bg-white p-3 rounded-3 border shadow-sm">
+                                    <div class="text-muted small fw-medium">Stage Velocity</div>
+                                    <div class="fs-4 fw-bold text-dark mt-1">14.2 Days</div>
+                                    <span class="badge bg-secondary-subtle text-secondary mt-1" style="font-size: 0.7rem;">Avg lead-to-close</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stage Progress Visualizer -->
+                        <div class="bg-white p-3 rounded-3 border shadow-sm mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-semibold small text-dark"><i class="bi bi-funnel-fill text-primary me-1"></i> Stage Distribution & Probability Alignment</span>
+                                <span class="badge bg-light text-dark border">Auto-Synchronized</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-info" style="width: 25%" title="Qualification (20%)"></div>
+                                <div class="progress-bar bg-primary" style="width: 35%" title="Proposal (50%)"></div>
+                                <div class="progress-bar bg-warning" style="width: 20%" title="Negotiation (80%)"></div>
+                                <div class="progress-bar bg-success" style="width: 20%" title="Won (100%)"></div>
+                            </div>
+                            <div class="d-flex justify-content-between text-muted small mt-2" style="font-size: 0.75rem;">
+                                <span><span class="badge bg-info p-1 me-1"> </span> Qualification ($350k)</span>
+                                <span><span class="badge bg-primary p-1 me-1"> </span> Proposal ($520k)</span>
+                                <span><span class="badge bg-warning p-1 me-1"> </span> Negotiation ($280k)</span>
+                                <span><span class="badge bg-success p-1 me-1"> </span> Closed-Won ($520k)</span>
+                            </div>
+                        </div>
+
+                        <!-- Mini Opportunity List -->
+                        <div class="bg-white rounded-3 border shadow-sm p-0 overflow-hidden">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover align-middle mb-0" style="font-size: 0.82rem;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Deal Name</th>
+                                            <th>Account</th>
+                                            <th>Stage</th>
+                                            <th>Probability</th>
+                                            <th>Amount</th>
+                                            <th>Forecast</th>
+                                            <th>Rep</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-semibold text-dark">Enterprise ERP Integration</td>
+                                            <td>Nexus Retail Group</td>
+                                            <td><span class="badge bg-warning text-dark">Negotiation</span></td>
+                                            <td>80%</td>
+                                            <td class="fw-bold">$120,000</td>
+                                            <td class="text-primary fw-semibold">$96,000</td>
+                                            <td>Alex Johnson</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-semibold text-dark">Cloud Migration Phase 2</td>
+                                            <td>Apex Global Systems</td>
+                                            <td><span class="badge bg-primary">Proposal</span></td>
+                                            <td>50%</td>
+                                            <td class="fw-bold">$85,000</td>
+                                            <td class="text-primary fw-semibold">$42,500</td>
+                                            <td>Alex Johnson</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-semibold text-dark">Annual SaaS License Tier A</td>
+                                            <td>Omni Logistics</td>
+                                            <td><span class="badge bg-success">Closed-Won</span></td>
+                                            <td>100%</td>
+                                            <td class="fw-bold">$160,000</td>
+                                            <td class="text-success fw-semibold">$160,000</td>
+                                            <td>Sarah Connor</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: Lead Conversion Wizard -->
+                    <div class="mockup-pane d-none" id="tab-lead-wizard">
+                        <div class="bg-white p-4 rounded-3 border shadow-sm">
+                            <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0"><i class="bi bi-magic text-primary me-2"></i>One-Click Lead Conversion Wizard</h6>
+                                    <span class="text-muted small">Transforms qualified prospects into Customer Accounts and Sales Opportunities seamlessly.</span>
+                                </div>
+                                <span class="badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i> Qualified Prospect</span>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="text-muted small fw-semibold text-uppercase" style="font-size: 0.7rem;">Prospect Details</div>
+                                        <div class="fw-bold text-dark mt-1">David Vance</div>
+                                        <div class="small text-muted">AeroTech Aerospace Ltd</div>
+                                        <div class="small text-muted font-monospace mt-1">david.v@aerotech.com</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="text-muted small fw-semibold text-uppercase" style="font-size: 0.7rem;">Automated Action 1</div>
+                                        <div class="fw-bold text-success mt-1"><i class="bi bi-building-add me-1"></i> New Customer Record</div>
+                                        <div class="small text-muted">Generates code CUST-009 with duplicate prevention checks</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="text-muted small fw-semibold text-uppercase" style="font-size: 0.7rem;">Automated Action 2</div>
+                                        <div class="fw-bold text-primary mt-1"><i class="bi bi-briefcase-fill me-1"></i> Initial Opportunity</div>
+                                        <div class="small text-muted">Opens $95,000 deal at Qualification stage automatically</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 p-3 rounded-3 bg-primary-subtle border border-primary-subtle d-flex justify-content-between align-items-center">
+                                <div class="small text-primary">
+                                    <i class="bi bi-info-circle-fill me-1"></i> Leads status automatically updates to <strong>Converted</strong>. Conversion links are archived for audit compliance.
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm px-3" onclick="alert('Simulation: In the real app, this creates both records instantaneously!');">
+                                    Simulate Conversion
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: Customer 360 -->
+                    <div class="mockup-pane d-none" id="tab-customer360">
+                        <div class="bg-white p-4 rounded-3 border shadow-sm">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <span class="badge bg-primary-subtle text-primary mb-1">CUST-001</span>
+                                    <h5 class="fw-bold text-dark mb-0">Nexus Enterprise Solutions</h5>
+                                    <p class="text-muted small mb-0">contact@nexus.com • +1-555-0192 • San Francisco, CA</p>
+                                </div>
+                                <span class="badge bg-success">Active Account</span>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="border rounded-3 p-3 bg-light">
+                                        <span class="text-muted small fw-bold">Commercial Summary</span>
+                                        <div class="mt-2 text-dark small"><strong>Total Opportunities:</strong> 2 ($240,000)</div>
+                                        <div class="text-dark small"><strong>Completed Follow-ups:</strong> 8</div>
+                                        <div class="text-dark small"><strong>Assigned Lead Rep:</strong> Alex Johnson</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="border rounded-3 p-3">
+                                        <span class="text-muted small fw-bold mb-2 d-block">Integrated Activity Timeline</span>
+                                        <div class="d-flex gap-2 mb-2 pb-2 border-bottom align-items-center">
+                                            <span class="badge bg-primary p-2"><i class="bi bi-telephone-fill"></i></span>
+                                            <div class="small flex-grow-1">
+                                                <strong>Call Logged:</strong> Executive review of Q4 cloud modernization requirements.
+                                                <div class="text-muted" style="font-size: 0.7rem;">Today at 10:30 AM by Alex Johnson</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2 align-items-center">
+                                            <span class="badge bg-success p-2"><i class="bi bi-calendar-check-fill"></i></span>
+                                            <div class="small flex-grow-1">
+                                                <strong>Follow-Up Completed:</strong> Contract review with Chief Information Officer.
+                                                <div class="text-muted" style="font-size: 0.7rem;">Yesterday at 2:15 PM</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: Audit Trail -->
+                    <div class="mockup-pane d-none" id="tab-audit">
+                        <div class="bg-white rounded-3 border shadow-sm p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="fw-bold small text-dark"><i class="bi bi-shield-check text-primary me-2"></i>Append-Only Immutable Compliance Ledger</div>
+                                <span class="badge bg-secondary">System Ledger Verified</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover align-middle mb-0 font-monospace" style="font-size: 0.8rem;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Timestamp (UTC)</th>
+                                            <th>User</th>
+                                            <th>Action</th>
+                                            <th>Entity</th>
+                                            <th>Record ID</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-muted">12-Oct-2026 12:15:30</td>
+                                            <td>admin@acxiom.com</td>
+                                            <td><span class="badge bg-primary">Create</span></td>
+                                            <td>Customer</td>
+                                            <td>CUST-008</td>
+                                            <td>Created customer Acme Corp</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">12-Oct-2026 12:14:10</td>
+                                            <td>sales@acxiom.com</td>
+                                            <td><span class="badge bg-warning text-dark">Convert</span></td>
+                                            <td>Lead</td>
+                                            <td>LEAD-004</td>
+                                            <td>Converted lead to Customer CUST-007</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">12-Oct-2026 12:10:02</td>
+                                            <td>manager@acxiom.com</td>
+                                            <td><span class="badge bg-info">Update</span></td>
+                                            <td>Opportunity</td>
+                                            <td>OPP-002</td>
+                                            <td>Stage: Proposal -> Negotiation</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">12-Oct-2026 12:00:45</td>
+                                            <td>sales@acxiom.com</td>
+                                            <td><span class="badge bg-success">Login</span></td>
+                                            <td>Auth</td>
+                                            <td>—</td>
+                                            <td>Successful session authentication</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Key Metrics Strip -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number text-primary">$14.8M+</div>
+                        <div class="stat-label">Pipeline Value Governed</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number text-success">99.99%</div>
+                        <div class="stat-label">System Availability SLA</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number text-dark">3.4x</div>
+                        <div class="stat-label">Faster Deal Cycle Velocity</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number text-indigo" style="color: #4f46e5;">100%</div>
+                        <div class="stat-label">Compliance Audit Integrity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Capabilities Matrix -->
+    <section class="py-5 bg-light" id="capabilities">
+        <div class="container py-4">
+            
+            <div class="text-center mb-5">
+                <span class="pill-badge mb-2">Architectural Capabilities</span>
+                <h2 class="fw-bold text-dark fs-1" style="letter-spacing: -0.03em;">Engineered for High-Stakes B2B Sales</h2>
+                <p class="text-muted mx-auto" style="max-width: 620px;">
+                    Every capability is constructed to enforce disciplined sales workflows, eliminate data leaks, and ensure executive compliance.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                
+                <!-- 1. Customer 360 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-box icon-blue">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Customer 360° Intelligence</h3>
+                        <p class="feature-description">
+                            Holistic account management linking deals, communications, scheduled follow-ups, and transaction histories in one authoritative view.
+                        </p>
+                        <span class="feature-tag">Duplicate Detection Active</span>
+                    </div>
+                </div>
+
+                <!-- 2. Lead Qualification Wizard -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-box icon-emerald">
+                            <i class="bi bi-funnel-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Lead Qualification & Conversion</h3>
+                        <p class="feature-description">
+                            Structured prospect lifecycle from qualification to automated dual-record conversion, spawning customer profiles and opportunities instantaneously.
+                        </p>
+                        <span class="feature-tag">1-Click Conversion Wizard</span>
+                    </div>
+                </div>
+
+                <!-- 3. Weighted Opportunity Pipeline -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-box icon-purple">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Weighted Revenue Pipeline</h3>
+                        <p class="feature-description">
+                            Real-time stage progression across Qualification, Proposal, and Negotiation with synchronized win probabilities and in-memory forecast models.
+                        </p>
+                        <span class="feature-tag">Amount &gt; 0 Enforced</span>
+                    </div>
+                </div>
+
+                <!-- 4. Follow-Ups & Activity Logging -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-box icon-amber">
+                            <i class="bi bi-calendar-check-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Proactive Follow-Up Engine</h3>
+                        <p class="feature-description">
+                            Overdue task alarms, multi-channel activity logging (Calls, Meetings, Emails, Tasks), and interactive rescheduling safeguards.
+                        </p>
+                        <span class="feature-tag">Past-Date Prevention</span>
+                    </div>
+                </div>
+
+                <!-- 5. Role-Based Governance -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-box icon-indigo">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Three-Tier Role Scoping</h3>
+                        <p class="feature-description">
+                            Granular permission boundaries and row-level scoping isolating Sales Rep portfolios from Manager team pipelines and Admin oversight.
+                        </p>
+                        <span class="feature-tag">Admin • Manager • SalesRep</span>
+                    </div>
+                </div>
+
+                <!-- 6. Append-Only Audit Trail -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-box icon-rose">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Immutable Audit Trail</h3>
+                        <p class="feature-description">
+                            Append-only compliance ledger capturing all authentication events, CRUD operations, stage changes, and administrative actions with IP tracking.
+                        </p>
+                        <span class="feature-tag">SOC2 & GDPR Aligned</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Pipeline & ROI Forecaster -->
+    <section class="py-5" id="calculator">
+        <div class="container py-4">
+            <div class="calculator-card">
+                <div class="row align-items-center g-4">
+                    
+                    <div class="col-lg-6">
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3 px-3 py-2 fw-semibold">Interactive Forecasting Model</span>
+                        <h2 class="fw-bold fs-1 text-white mb-3" style="letter-spacing: -0.02em;">Model Your Revenue Pipeline Velocity</h2>
+                        <p class="text-light opacity-75 mb-4">
+                            Adjust your deal parameters below to observe how AcxiomCRM's disciplined stage progression and automated follow-up engine accelerates your pipeline forecast.
+                        </p>
+
+                        <!-- Sliders -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="fw-semibold text-light">Monthly Deal Volume</span>
+                                <span class="fw-bold text-primary" id="calcDealsVal">25</span>
+                            </div>
+                            <input type="range" class="form-range" id="calcDeals" min="5" max="100" value="25" />
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="fw-semibold text-light">Average Contract Value (ACV)</span>
+                                <span class="fw-bold text-success" id="calcAcvVal">$45,000</span>
+                            </div>
+                            <input type="range" class="form-range" id="calcAcv" min="5000" max="250000" step="5000" value="45000" />
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="fw-semibold text-light">Forecast Win Rate</span>
+                                <span class="fw-bold text-warning" id="calcWinRateVal">32%</span>
+                            </div>
+                            <input type="range" class="form-range" id="calcWinRate" min="10" max="80" value="32" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="calc-output-box">
+                            <h5 class="fw-bold text-white mb-3"><i class="bi bi-graph-up-arrow text-success me-2"></i>Projected Revenue Impact</h5>
+                            
+                            <div class="mb-3 pb-3 border-bottom border-secondary border-opacity-25">
+                                <div class="text-light opacity-75 small">Projected Annual Closed Revenue</div>
+                                <div class="fs-2 fw-bold text-success" id="outAnnualRev">$4,320,000</div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="text-light opacity-75 small">Weighted Pipeline / Mo</div>
+                                    <div class="fs-4 fw-bold text-primary" id="outWeightedPipe">$360,000 /mo</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-light opacity-75 small">Rep Administrative Hours Saved</div>
+                                    <div class="fs-4 fw-bold text-warning" id="outHoursSaved">105 hrs /mo</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-premium-primary w-100 justify-content-center">
+                                    <i class="bi bi-lightning-charge-fill"></i> Unlock This Revenue Efficiency
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role-Based Workspaces Showcase -->
+    <section class="py-5 bg-light" id="demo">
+        <div class="container py-4">
+            
+            <div class="text-center mb-5">
+                <span class="pill-badge mb-2">Zero Setup Required</span>
+                <h2 class="fw-bold text-dark fs-1" style="letter-spacing: -0.03em;">Experience Dedicated Role Workspaces</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">
+                    Test the application immediately using our pre-seeded demonstration accounts tailored for each organizational stakeholder.
+                </p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                
+                <!-- Administrator Role Card -->
+                <div class="col-md-4">
+                    <div class="role-card d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-danger">Administrator</span>
+                            <i class="bi bi-shield-fill-check fs-4 text-danger"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-2">System Administrator</h4>
+                        <p class="text-muted small mb-3 flex-grow-1">
+                            Complete institutional sovereignty. Full user/role provisioning, system-wide immutable audit trail inspection, and unrestricted CRM oversight.
+                        </p>
+                        <div class="bg-light p-2 rounded-2 small font-monospace text-muted mb-3 border" style="font-size: 0.75rem;">
+                            User: admin@acxiom.com<br />
+                            Pass: Admin@@12345
+                        </div>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-danger btn-sm w-100 fw-semibold">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Access Admin Portal
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sales Manager Role Card -->
+                <div class="col-md-4">
+                    <div class="role-card d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-primary">Sales Manager</span>
+                            <i class="bi bi-bar-chart-line-fill fs-4 text-primary"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-2">Revenue Director</h4>
+                        <p class="text-muted small mb-3 flex-grow-1">
+                            Team-wide pipeline transparency. Monitor conversion velocity, stage progression analytics, executive reporting, and read-only audit logs.
+                        </p>
+                        <div class="bg-light p-2 rounded-2 small font-monospace text-muted mb-3 border" style="font-size: 0.75rem;">
+                            User: manager@acxiom.com<br />
+                            Pass: Manager@@12345
+                        </div>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary btn-sm w-100 fw-semibold">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Access Manager Portal
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sales Executive Role Card -->
+                <div class="col-md-4">
+                    <div class="role-card d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-success">Sales Executive</span>
+                            <i class="bi bi-person-fill-check fs-4 text-success"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-2">Sales Representative</h4>
+                        <p class="text-muted small mb-3 flex-grow-1">
+                            Laser-focused deal execution. Strictly scoped to assigned customers, active leads, scheduled follow-ups, and personal commission pipeline.
+                        </p>
+                        <div class="bg-light p-2 rounded-2 small font-monospace text-muted mb-3 border" style="font-size: 0.75rem;">
+                            User: sales@acxiom.com<br />
+                            Pass: Sales@@12345
+                        </div>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-success btn-sm w-100 fw-semibold">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Access Rep Portal
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture & Security Matrix -->
+    <section class="py-5" id="security">
+        <div class="container py-4">
+            
+            <div class="text-center mb-5">
+                <span class="pill-badge mb-2">Security By Design</span>
+                <h2 class="fw-bold text-dark fs-1" style="letter-spacing: -0.03em;">Enterprise Security Architecture</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">
+                    Zero tolerance for security vulnerabilities. Built from the ground up with defensive software engineering patterns.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+                        <div class="text-primary fs-3 mb-2"><i class="bi bi-shield-lock"></i></div>
+                        <h6 class="fw-bold text-dark">PBKDF2 Password Security</h6>
+                        <p class="text-muted small mb-0">
+                            Managed through ASP.NET Core Identity. Plain-text passwords never touch persistence layers or audit logs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+                        <div class="text-danger fs-3 mb-2"><i class="bi bi-lock"></i></div>
+                        <h6 class="fw-bold text-dark">Automated Brute-Force Lockout</h6>
+                        <p class="text-muted small mb-0">
+                            Accounts automatically lock for 15 minutes upon 5 consecutive failed login attempts to thwart credential stuffing.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+                        <div class="text-success fs-3 mb-2"><i class="bi bi-database-check"></i></div>
+                        <h6 class="fw-bold text-dark">SQL Injection Immunity</h6>
+                        <p class="text-muted small mb-0">
+                            Enforced through Entity Framework Core 8 parameterized query engine. Zero unparameterized SQL concatenation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+                        <div class="text-warning fs-3 mb-2"><i class="bi bi-patch-check"></i></div>
+                        <h6 class="fw-bold text-dark">CSRF Anti-Forgery Defense</h6>
+                        <p class="text-muted small mb-0">
+                            All state-mutating requests mandate cryptographic anti-forgery request validation tokens.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="py-5 bg-light">
+        <div class="container py-4" style="max-width: 800px;">
+            <div class="text-center mb-5">
+                <span class="pill-badge mb-2">Technical Clarity</span>
+                <h2 class="fw-bold text-dark fs-2">Frequently Answered Questions</h2>
+            </div>
+
+            <div class="accordion custom-accordion" id="faqAccordion">
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            How does the Lead-to-Customer conversion workflow work?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            When a prospect is qualified, clicking "Convert" triggers a transaction wizard. It automatically creates an authoritative Customer profile, spins up an initial Sales Opportunity at the Qualification stage, updates the Lead status to "Converted", and logs an immutable audit event recording the lineage.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            How is data scoped between Sales Executives and Managers?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Row-level security is enforced via <code>ICurrentUserService</code>. Sales Executives only see customers, leads, opportunities, and follow-ups assigned to their user ID. Sales Managers see team-wide pipelines and reports, while Administrators have unrestricted system control.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Does the platform provide RESTful API endpoints?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes. The platform provides full JSON REST API endpoints under <code>/api/customers</code>, <code>/api/leads</code>, <code>/api/opportunities</code>, <code>/api/followups</code>, and <code>/api/reports</code>, using dedicated DTOs and standard HTTP status codes.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            How does the audit trail safeguard against parameter collisions?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            The audit log subsystem uses explicit query binding (<code>actionFilter</code>) to eliminate collisions with ASP.NET Core's default MVC route action token, ensuring search filters and query expressions execute reliably across all criteria.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Call to Action -->
+    <section class="py-5 bg-white border-top">
+        <div class="container py-4 text-center">
+            <h2 class="fw-bold text-dark fs-1 mb-3" style="letter-spacing: -0.02em;">Ready to Experience AcxiomCRM?</h2>
+            <p class="text-muted mx-auto mb-4" style="max-width: 580px;">
+                Log in to the live portal immediately with any role, or run the automated test suite to verify all compliance criteria.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-premium-primary btn-lg">
+                    <i class="bi bi-box-arrow-in-right"></i> Open Workspace Portal
+                </a>
+                <button type="button" class="btn btn-premium-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#demoModal">
+                    <i class="bi bi-key-fill text-warning"></i> View Demo Logins
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Enterprise Footer -->
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary text-white rounded-3 p-2 d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                            <i class="bi bi-diagram-3-fill fs-6"></i>
+                        </div>
+                        <span class="fs-5 fw-bold text-white">Acxiom<span class="text-primary">CRM</span></span>
+                    </div>
+                    <p class="small text-muted mb-3" style="max-width: 320px;">
+                        Enterprise Sales Execution & Revenue Governance Platform. Engineered to meet strict Software Requirements Specifications.
+                    </p>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-secondary" style="font-size: 0.7rem;">.NET 8 LTS</span>
+                        <span class="badge bg-secondary" style="font-size: 0.7rem;">EF Core 8</span>
+                        <span class="badge bg-secondary" style="font-size: 0.7rem;">SQLite</span>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h6>Product</h6>
+                    <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                        <li><a href="#preview">Pipeline Tour</a></li>
+                        <li><a href="#capabilities">Customer 360</a></li>
+                        <li><a href="#capabilities">Lead Wizard</a></li>
+                        <li><a href="#calculator">ROI Engine</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h6>Governance</h6>
+                    <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                        <li><a href="#security">PBKDF2 Security</a></li>
+                        <li><a href="#security">Lockout Defense</a></li>
+                        <li><a href="#capabilities">Audit Trail</a></li>
+                        <li><a href="#demo">Role Scoping</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h6>APIs & Docs</h6>
+                    <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                        <li><a href="/api/customers">Customers API</a></li>
+                        <li><a href="/api/opportunities">Pipeline API</a></li>
+                        <li><a href="/api/reports/pipeline">Reports API</a></li>
+                        <li><a href="https://github.com/vikramkumarprasad/Axciom-CRM" target="_blank">GitHub Repo</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h6>Compliance</h6>
+                    <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                        <li><span class="text-muted">Section 17.20 Standard</span></li>
+                        <li><span class="text-muted">Append-Only Ledger</span></li>
+                        <li><span class="text-muted">14 E2E Tests Passed</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-4 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center flex-wrap gap-2 text-muted small">
+                <div>
+                    &copy; @DateTime.UtcNow.Year AcxiomCRM Enterprise. All rights reserved.
+                </div>
+                <div>
+                    Built with clean architectural rigor and defensive design standards.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Credentials Modal -->
+    <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-light border-bottom">
+                    <h5 class="modal-title fw-bold text-dark" id="demoModalLabel">
+                        <i class="bi bi-key-fill text-warning me-2"></i> Instant Demo Credentials
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">
+                        Select a role to sign in immediately with pre-configured access permissions:
+                    </p>
+
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-danger text-start p-3 rounded-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">System Administrator</div>
+                                    <div class="small text-muted font-monospace">admin@acxiom.com / Admin@@12345</div>
+                                </div>
+                                <span class="badge bg-danger">Full Control</span>
+                            </div>
+                        </a>
+
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary text-start p-3 rounded-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Sales Manager</div>
+                                    <div class="small text-muted font-monospace">manager@acxiom.com / Manager@@12345</div>
+                                </div>
+                                <span class="badge bg-primary">Team Scope</span>
+                            </div>
+                        </a>
+
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-success text-start p-3 rounded-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Sales Executive</div>
+                                    <div class="small text-muted font-monospace">sales@acxiom.com / Sales@@12345</div>
+                                </div>
+                                <span class="badge bg-success">Personal Scope</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light border-top">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-sm">Go to Login Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Landing JS -->
+    <script src="~/js/landing.js" asp-append-version="true"></script>
+</body>
+</html>
