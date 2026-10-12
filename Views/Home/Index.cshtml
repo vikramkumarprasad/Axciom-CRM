@@ -567,33 +567,35 @@
                 <div class="row align-items-center g-4">
                     
                     <div class="col-lg-6">
-                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3 px-3 py-2 fw-semibold">Interactive Forecasting Model</span>
-                        <h2 class="fw-bold fs-1 text-white mb-3" style="letter-spacing: -0.02em;">Model Your Revenue Pipeline Velocity</h2>
-                        <p class="text-light opacity-75 mb-4">
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3 px-3 py-2 fw-semibold">
+                            <i class="bi bi-calculator-fill me-1"></i> Interactive Forecasting Model
+                        </span>
+                        <h2 class="fw-bold fs-1 text-dark mb-3" style="letter-spacing: -0.02em;">Model Your Revenue Pipeline Velocity</h2>
+                        <p class="text-muted mb-4">
                             Adjust your deal parameters below to observe how AcxiomCRM's disciplined stage progression and automated follow-up engine accelerates your pipeline forecast.
                         </p>
 
                         <!-- Sliders -->
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between small mb-1">
-                                <span class="fw-semibold text-light">Monthly Deal Volume</span>
-                                <span class="fw-bold text-primary" id="calcDealsVal">25</span>
+                            <div class="d-flex justify-content-between align-items-center small mb-1">
+                                <span class="fw-semibold text-dark">Monthly Deal Volume</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace px-2 py-1" id="calcDealsVal">25</span>
                             </div>
                             <input type="range" class="form-range" id="calcDeals" min="5" max="100" value="25" />
                         </div>
 
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between small mb-1">
-                                <span class="fw-semibold text-light">Average Contract Value (ACV)</span>
-                                <span class="fw-bold text-success" id="calcAcvVal">$45,000</span>
+                            <div class="d-flex justify-content-between align-items-center small mb-1">
+                                <span class="fw-semibold text-dark">Average Contract Value (ACV)</span>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle font-monospace px-2 py-1" id="calcAcvVal">$45,000</span>
                             </div>
                             <input type="range" class="form-range" id="calcAcv" min="5000" max="250000" step="5000" value="45000" />
                         </div>
 
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between small mb-1">
-                                <span class="fw-semibold text-light">Forecast Win Rate</span>
-                                <span class="fw-bold text-warning" id="calcWinRateVal">32%</span>
+                            <div class="d-flex justify-content-between align-items-center small mb-1">
+                                <span class="fw-semibold text-dark">Forecast Win Rate</span>
+                                <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle font-monospace px-2 py-1" id="calcWinRateVal">32%</span>
                             </div>
                             <input type="range" class="form-range" id="calcWinRate" min="10" max="80" value="32" />
                         </div>
@@ -601,26 +603,26 @@
 
                     <div class="col-lg-6">
                         <div class="calc-output-box">
-                            <h5 class="fw-bold text-white mb-3"><i class="bi bi-graph-up-arrow text-success me-2"></i>Projected Revenue Impact</h5>
+                            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-graph-up-arrow text-success me-2"></i>Projected Revenue Impact</h5>
                             
-                            <div class="mb-3 pb-3 border-bottom border-secondary border-opacity-25">
-                                <div class="text-light opacity-75 small">Projected Annual Closed Revenue</div>
-                                <div class="fs-2 fw-bold text-success" id="outAnnualRev">$4,320,000</div>
+                            <div class="mb-3 pb-3 border-bottom border-secondary border-opacity-10">
+                                <div class="text-muted small fw-medium">Projected Annual Closed Revenue</div>
+                                <div class="fs-1 fw-bold text-success font-monospace" id="outAnnualRev">$4,320,000</div>
                             </div>
 
                             <div class="row g-3">
                                 <div class="col-6">
-                                    <div class="text-light opacity-75 small">Weighted Pipeline / Mo</div>
-                                    <div class="fs-4 fw-bold text-primary" id="outWeightedPipe">$360,000 /mo</div>
+                                    <div class="text-muted small fw-medium">Weighted Pipeline / Mo</div>
+                                    <div class="fs-4 fw-bold text-primary font-monospace" id="outWeightedPipe">$360,000 /mo</div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="text-light opacity-75 small">Rep Administrative Hours Saved</div>
-                                    <div class="fs-4 fw-bold text-warning" id="outHoursSaved">105 hrs /mo</div>
+                                    <div class="text-muted small fw-medium">Rep Admin Hours Saved</div>
+                                    <div class="fs-4 fw-bold text-dark font-monospace" id="outHoursSaved">105 hrs /mo</div>
                                 </div>
                             </div>
 
-                            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                                <a asp-controller="Account" asp-action="Login" class="btn btn-premium-primary w-100 justify-content-center">
+                            <div class="mt-4 pt-3 border-top border-secondary border-opacity-10">
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-premium-primary w-100 justify-content-center py-2 fs-6">
                                     <i class="bi bi-lightning-charge-fill"></i> Unlock This Revenue Efficiency
                                 </a>
                             </div>
@@ -864,15 +866,15 @@
                         <div class="bg-primary text-white rounded-3 p-2 d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
                             <i class="bi bi-diagram-3-fill fs-6"></i>
                         </div>
-                        <span class="fs-5 fw-bold text-white">Acxiom<span class="text-primary">CRM</span></span>
+                        <span class="fs-5 fw-bold text-dark">Acxiom<span class="text-primary">CRM</span></span>
                     </div>
                     <p class="small text-muted mb-3" style="max-width: 320px;">
                         Enterprise Sales Execution & Revenue Governance Platform. Engineered to meet strict Software Requirements Specifications.
                     </p>
                     <div class="d-flex gap-2">
-                        <span class="badge bg-secondary" style="font-size: 0.7rem;">.NET 8 LTS</span>
-                        <span class="badge bg-secondary" style="font-size: 0.7rem;">EF Core 8</span>
-                        <span class="badge bg-secondary" style="font-size: 0.7rem;">SQLite</span>
+                        <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;">.NET 8 LTS</span>
+                        <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;">EF Core 8</span>
+                        <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;">SQLite</span>
                     </div>
                 </div>
 
@@ -916,7 +918,7 @@
                 </div>
             </div>
 
-            <div class="pt-4 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center flex-wrap gap-2 text-muted small">
+            <div class="pt-4 border-top border-secondary border-opacity-10 d-flex justify-content-between align-items-center flex-wrap gap-2 text-muted small">
                 <div>
                     &copy; @DateTime.UtcNow.Year AcxiomCRM Enterprise. All rights reserved.
                 </div>
